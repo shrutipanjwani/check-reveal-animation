@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="Check icon.svg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Reveal Animation</title>
+    <style>
+        .wrap{
+            width: 100%;
+        }
+        p{
+            text-align: center;
+            font-size: 25px;
+            color: #333;
+        }
+        /* CSS Animation */
+        #circle{
+            stroke-dashoffset: 1000;
+            stroke-dasharray: 1000;
+            animation-name: round;
+            animation-duration: 2s;
+            animation-timing-function: ease-in-out;
+        }
+
+        .check{
+            stroke-dashoffset: 1000;
+            stroke-dasharray: 1000;
+            animation-name: round;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-delay: 1s;
+        }
+
+        @keyframes round {
+            to{
+                stroke-dashoffset: 0;
+
+            }
+        }
+
+        .checkmark{
+            display: none;
+            position: relative;
+            width: 270px;
+            height: 270px;
+            margin: auto;
+        }
+
+        .spinner {
+            position: relative;
+            margin: auto;
+            box-sizing: border-box;
+            background-clip: padding-box;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-top: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            /* -webkit-mask: linear-gradient(rgba(0, 0, 0, 0.1), #000000 90%); */
+            transform-origin: 50% 60%;
+            /* transform: perspective(200px) rotateX(66deg); */
+            animation: spinner-wiggle 1.2s infinite;
+        }
+        .spinner:before,
+        .spinner:after {
+            content: "";
+            position: absolute;
+            margin: -4px;
+            box-sizing: inherit;
+            width: inherit;
+            height: inherit;
+            border-radius: inherit;
+            opacity: .06;
+            border: inherit;
+            border-color: transparent;
+            animation: spinner-spin 1.2s cubic-bezier(0.6, 0.2, 0, 0.8) infinite, spinner-fade 1.2s linear infinite;
+        }
+
+        .spinner:before {
+            border-top-color: #2eadc7;
+        }
+
+        .spinner:after {
+            border-top-color: #bea62c;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes spinner-spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes spinner-fade {
+            20% {
+                opacity: .1;
+                transform: perspective(400px) rotateX(60deg);
+            }
+            40% {
+                opacity: 1;
+                transform: perspective(400px) rotateX(180deg);
+            }
+            60% {
+                opacity: .1;
+                transform: perspective(400px) rotateX(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <p>Here's the tick mark reveal animation made using CSS & JS</p>
+        <svg class="checkmark" width="250" height="250" viewBox="0 0 395 312" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="395" height="312" fill="transparent"/>
+            <ellipse id="circle" cx="186" cy="156" rx="134" ry="133" fill="transparent" stroke="#2eadc7" stroke-width="8"/>
+            <path class="check" d="M154 213.84L280 116" stroke="#2eadc7" stroke-width="8" stroke-miterlimit="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="check" d="M110 156L151 211" stroke="#2eadc7" stroke-width="8" stroke-miterlimit="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="spinner"></div>
+    </div>
+    <script>
+        let spinner = document.querySelector('.spinner');
+        let check = document.querySelector('.checkmark');
+
+        setTimeout(function (){
+            check.style.display = "block";
+            spinner.style.display = "none";
+        }, 3000);
+
+    </script>
+</body>
+</html>
